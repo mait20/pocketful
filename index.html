@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Pocketful — Expense Console</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +48,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* HIGH-CONTRAST BACKGROUND PATTERN (Food, Bills, Entertainment Blueprint) */
+        /* HIGH-CONTRAST DENSE BACKGROUND PATTERN (Food, Bills, Entertainment Blueprint) */
         body::before {
             content: "";
             position: absolute;
@@ -230,8 +231,7 @@
         <p>Organise Your Expenses</p>
     </div>
 
-    <form id="ledgerForm" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbynrh6S7wRfYQxWx-EgoOPWvIGu9izheey_Xml3gUeHBwmBZIPNQDOyoM7xKKijeN5U/exec">
-        
+    <form id="ledgerForm" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycby3NKpBmt4K-LrKKSz2PuisiX_J04-LlugyLXSg_HFvE4I1ZhBAk9FBnT25KFIzE9yu/exec">
         <div class="form-group">
             <label for="date">Calendar Date</label>
             <div class="input-wrapper">
@@ -365,7 +365,6 @@
 
     var submitted = false;
     
-    // UI feedback handling when the form hits the submit thread
     document.getElementById('ledgerForm').addEventListener('submit', function() {
         const submitBtn = document.getElementById('submitBtn');
         const statusBox = document.getElementById('statusBox');
@@ -373,18 +372,16 @@
         submitBtn.disabled = true;
         statusBox.style.display = 'block';
         statusBox.className = 'status-loading';
-        statusBox.textContent = 'Filing that away securely into your sheet... 🌿';
+        statusBox.textContent = 'Gently filing that away into your sheet... 🌿';
         submitted = true;
     });
 
-    // Intercept when the background frame registers a completed ingestion loop from Google
     function iframe_loaded() {
         if (submitted) {
             const statusBox = document.getElementById('statusBox');
             statusBox.className = 'status-success';
             statusBox.textContent = 'Saved ✨';
             
-            // Clear inputs for the next entry loop cleanly
             document.getElementById('description').value = '';
             document.getElementById('amount').value = '';
             document.getElementById('date').valueAsDate = new Date();

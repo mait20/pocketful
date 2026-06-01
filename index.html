@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocketful — Expense Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Soft Pastel Botanical Color Palette */
+            --bg-base: #e6efe9; /* Richer pastel mint clay for better illustration background contrast */
+            --panel-bg: rgba(254, 254, 252, 0.98); /* Solid clean warm white paper */
+            --text-main: #142219;
+            --text-muted: #55665c;
+            --accent: #ca7253; /* Soft warm terracotta clay */
+            --accent-hover: #b56244;
+            --mint-glow: #d8ebddec;
+            --input-bg: #f4f8f5;
+            --input-border: #bcd2c4;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, sans-serif;
+            --shadow: 0 30px 60px rgba(25, 43, 33, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 24px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HIGH-CONTRAST BACKGROUND PATTERN (Food, Bills, Entertainment Blueprint) */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.35;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140' fill='none' stroke='%2332523f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M20 20c2-3 5-5 8-5s6 2 8 5M20 25v6c0 3.5 2.5 6 6 6s6-2.5 6-6v-6'/%3e%3ccircle cx='24' cy='23' r='1' fill='%2332523f'/%3e%3ccircle cx='32' cy='23' r='1' fill='%2332523f'/%3e%3crect x='85' y='15' width='32' height='18' rx='2' transform='rotate(12 85 15)'/%3e%3ccircle cx='93' cy='22' r='1.5' fill='%2332523f'/%3e%3cline x1='103' y1='21' x2='111' y2='23'/%3e%3cpath d='M15 85h18v28l-3.5-2.5-3.5 2.5-3.5-2.5-3.5 2.5z'/%3e%3cline x1='19' y1='91' x2='26' y2='91'/%3e%3cline x1='19' y1='97' x2='29' y2='97'/%3e%3cpath d='M95 90h16a2 2 0 0 1 2 2v8a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-8v-8z'/%3e%3cpath d='M113 93h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-3'/%3e%3cline x1='100' y1='81' x2='100' y2='85'/%3e%3cline x1='105' y1='79' x2='105' y2='85'/%3e%3cline x1='110' y1='81' x2='110' y2='85'/%3e%3c/svg%3e");
+            background-repeat: repeat;
+        }
+
+        .console-container {
+            background: var(--panel-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            width: 100%;
+            max-width: 540px;
+            border-radius: 36px;
+            padding: 48px;
+            box-shadow: var(--shadow);
+            border: 2px solid rgba(50, 82, 63, 0.08);
+            position: relative;
+        }
+
+        /* Dynamic Intention Greeting Area */
+        .greeting-box {
+            background: linear-gradient(135deg, #e4eee7 0%, #faf1e8 100%);
+            padding: 16px 24px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 36px;
+            border: 1px solid rgba(202, 114, 83, 0.12);
+        }
+
+        #dynamicGreeting {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: #1e3527;
+            letter-spacing: 0.1px;
+            line-height: 1.4;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .header-section h1 {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .header-section p {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 700;
+            color: #273d30;
+            margin-bottom: 10px;
+            padding-left: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            color: #445c4d;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+            transition: color 0.25s ease;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px 18px 15px 52px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 16px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23273d30' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 15px;
+            padding-right: 48px;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(202, 114, 83, 0.12);
+        }
+
+        input:focus + .input-icon, select:focus + .input-icon {
+            color: var(--accent);
+        }
+
+        input::placeholder {
+            color: #9cb0a2;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--accent);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 6px 24px rgba(202, 114, 83, 0.25);
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(202, 114, 83, 0.35);
+        }
+
+        #statusBox {
+            margin-top: 24px;
+            padding: 15px 20px;
+            border-radius: 16px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+
+        .status-loading { background-color: #e6eee8; color: #234433; }
+        .status-success { background-color: #d1e7dd; color: #0f5132; }
+    </style>
+</head>
+<body>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof iframe_loaded !== 'undefined') iframe_loaded();"></iframe>
+
+<div class="console-container">
+    <div class="greeting-box">
+        <span id="dynamicGreeting">Setting intention for the space... ✨</span>
+    </div>
+
+    <div class="header-section">
+        <h1>Pocketful</h1>
+        <p>Organise Your Expenses</p>
+    </div>
+
+    <form id="ledgerForm" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbynrh6S7wRfYQxWx-EgoOPWvIGu9izheey_Xml3gUeHBwmBZIPNQDOyoM7xKKijeN5U/exec">
+        
+        <div class="form-group">
+            <label for="date">Calendar Date</label>
+            <div class="input-wrapper">
+                <input type="date" id="date" name="date" required>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="3" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                        <path d="M8 2v4M16 2v4" />
+                        <circle cx="8" cy="14" r="1" fill="currentColor" />
+                        <circle cx="12" cy="14" r="1" fill="currentColor" />
+                        <circle cx="16" cy="14" r="1" fill="currentColor" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Allocation Category</label>
+            <div class="input-wrapper">
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Choose category...</option>
+                    <option value="Staff Salary">Staff Salary</option>
+                    <option value="Groceries">Groceries (Instamart, Blinkit, Zepto, DMart)</option>
+                    <option value="Food / Dining">Food / Dining (Zomato, Swiggy, Restaurants)</option>
+                    <option value="Household Essentials">Household Essentials (Harpic, Surf, Cleaners)</option>
+                    <option value="Utility Bills">Utility Bills (Rent, Power, Wi-Fi, Recharge)</option>
+                    <option value="Fuel & Transport">Fuel & Transport (Petrol, Auto, Uber, Metro)</option>
+                    <option value="Entertainment">Entertainment (Movies, Outings, Concerts)</option>
+                    <option value="Lifestyle">Lifestyle (Shopping, Salon, Clothes, Gadgets)</option>
+                    <option value="Medicine & Healthcare">Medicine & Healthcare (Apollo, Doctors, Labs)</option>
+                    <option value="Jayesh/Pallavi/Maushi">Jayesh / Pallavi / Maushi (Cash/Home Funds)</option>
+                    <option value="One-Time / Non-Recurring">One-Time / Non-Recurring (Gifts, Repairs, Premium)</option>
+                    <option value="Investments & Savings">Investments & Savings</option>
+                    <option value="Subscriptions">Subscriptions</option>
+                    <option value="Others">Others</option>
+                </select>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2S8 6 8 9a4 4 0 0 0 8 0c0-3-4-7-4-7z" />
+                        <path d="M10 14a3.5 3.5 0 1 0 5 4" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sourcingChannel">Platform</label>
+            <div class="input-wrapper">
+                <select id="sourcingChannel" name="sourcingChannel" required>
+                    <option value="" disabled selected>Select platform...</option>
+                    <option value="Online">Online (General Digital Network)</option>
+                    <option value="Offline">Offline Store / In-Person Market</option>
+                    <option value="Amazon">Amazon Marketplace</option>
+                    <option value="Swiggy/Blinkit">Swiggy / Blinkit / Zepto</option>
+                    <option value="Myntra/Ajio">Myntra / Ajio</option>
+                </select>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                        <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Particulars Description</label>
+            <div class="input-wrapper">
+                <input type="text" id="description" name="description" placeholder="What should we note down?..." required>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                        <path d="m15 5 4 4M5 16l3 3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Value Amount</label>
+            <div class="input-wrapper">
+                <input type="number" id="amount" name="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="6" rx="6" ry="3" />
+                        <path d="M6 6v6c0 1.66 2.68 3 6 3s6-1.34 6-3V6" />
+                        <path d="M6 12v6c0 1.66 2.68 3 6 3s6-1.34 6-3v-6" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="paymentMode">Payment Channel</label>
+            <div class="input-wrapper">
+                <select id="paymentMode" name="paymentMode" required>
+                    <option value="" disabled selected>Select channel route...</option>
+                    <option value="Cash">Cash 💵</option>
+                    <option value="Card">Card 💳</option>
+                    <option value="UPI">UPI 📱</option>
+                </select>
+                <div class="input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 12V8H4v10a2 2 0 0 0 2 2h14v-4" />
+                        <path d="M22 13a2 2 0 0 0-2-2H15v4h5a2 2 0 0 0 2-2Z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">Commit Log</button>
+    </form>
+
+    <div id="statusBox"></div>
+</div>
+
+<script>
+    const prompts = [
+        "Fresh day, fresh canvas. Take a deep breath. ☕",
+        "Time to design a beautiful, well-balanced day! 🌿",
+        "Manifesting clarity, calm, and beautiful alignment today. ✨",
+        "Cultivating intentional routines and happy roots. 🪴",
+        "Your space, your layout, your complete peace of mind. 🤍",
+        "A little regular structural care builds magnificent things. 🍃"
+    ];
+    document.getElementById('dynamicGreeting').textContent = prompts[Math.floor(Math.random() * prompts.length)];
+
+    document.getElementById('date').valueAsDate = new Date();
+
+    var submitted = false;
+    
+    // UI feedback handling when the form hits the submit thread
+    document.getElementById('ledgerForm').addEventListener('submit', function() {
+        const submitBtn = document.getElementById('submitBtn');
+        const statusBox = document.getElementById('statusBox');
+
+        submitBtn.disabled = true;
+        statusBox.style.display = 'block';
+        statusBox.className = 'status-loading';
+        statusBox.textContent = 'Filing that away securely into your sheet... 🌿';
+        submitted = true;
+    });
+
+    // Intercept when the background frame registers a completed ingestion loop from Google
+    function iframe_loaded() {
+        if (submitted) {
+            const statusBox = document.getElementById('statusBox');
+            statusBox.className = 'status-success';
+            statusBox.textContent = 'Saved ✨';
+            
+            // Clear inputs for the next entry loop cleanly
+            document.getElementById('description').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('submitBtn').disabled = false;
+            submitted = false;
+        }
+    }
+</script>
+
+</body>
+</html>

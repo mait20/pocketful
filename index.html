@@ -28,11 +28,7 @@
             --shadow: 0 30px 60px rgba(25, 43, 33, 0.15);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font-sans);
@@ -48,7 +44,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* BACKGROUND PATTERN */
+        /* HIGH-CONTRAST DENSE BACKGROUND PATTERN */
         body::before {
             content: "";
             position: absolute;
@@ -61,160 +57,51 @@
             background: var(--panel-bg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            width: 100%;
-            max-width: 540px;
-            border-radius: 36px;
-            padding: 48px;
-            box-shadow: var(--shadow);
-            border: 2px solid rgba(50, 82, 63, 0.08);
-            position: relative;
+            width: 100%; max-width: 540px; border-radius: 36px; padding: 48px;
+            box-shadow: var(--shadow); border: 2px solid rgba(50, 82, 63, 0.08); position: relative;
         }
 
         .greeting-box {
             background: linear-gradient(135deg, #e4eee7 0%, #faf1e8 100%);
-            padding: 16px 24px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 36px;
+            padding: 16px 24px; border-radius: 20px; text-align: center; margin-bottom: 36px;
             border: 1px solid rgba(202, 114, 83, 0.12);
         }
 
-        #dynamicGreeting {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            font-weight: 500;
-            color: #1e3527;
-            letter-spacing: 0.1px;
-            line-height: 1.4;
-        }
-
-        .header-section {
-            text-align: center;
-            margin-bottom: 38px;
-        }
-
-        .header-section h1 {
-            font-family: var(--font-display);
-            font-size: 34px;
-            font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-
-        .header-section p {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            font-family: var(--font-sans);
-            font-size: 11px;
-            font-weight: 700;
-            color: #273d30;
-            margin-bottom: 10px;
-            padding-left: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 18px;
-            color: #445c4d;
-            display: flex;
-            align-items: center;
-            pointer-events: none;
-            transition: color 0.25s ease;
-        }
-
+        #dynamicGreeting { font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: #1e3527; letter-spacing: 0.1px; line-height: 1.4; }
+        .header-section { text-align: center; margin-bottom: 38px; }
+        .header-section h1 { font-family: var(--font-display); font-size: 34px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.3px; }
+        .header-section p { font-family: var(--font-sans); font-size: 14px; color: var(--text-muted); font-weight: 400; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-family: var(--font-sans); font-size: 11px; font-weight: 700; color: #273d30; margin-bottom: 10px; padding-left: 2px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-icon { position: absolute; left: 18px; color: #445c4d; display: flex; align-items: center; pointer-events: none; transition: color 0.25s ease; }
+        
         input, select {
-            width: 100%;
-            padding: 15px 18px 15px 52px;
-            font-family: var(--font-sans);
-            font-size: 15px;
-            color: var(--text-main);
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            border-radius: 16px;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
+            width: 100%; padding: 15px 18px 15px 52px; font-family: var(--font-sans); font-size: 15px;
+            color: var(--text-main); background-color: var(--input-bg); border: 1px solid var(--input-border);
+            border-radius: 16px; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); outline: none;
+            -webkit-appearance: none; appearance: none;
         }
 
         select {
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23273d30' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-            background-size: 15px;
-            padding-right: 48px;
+            background-repeat: no-repeat; background-position: right 20px center; background-size: 15px; padding-right: 48px;
         }
 
-        input:focus, select:focus {
-            border-color: var(--accent);
-            background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(202, 114, 83, 0.12);
-        }
-
-        input:focus + .input-icon, select:focus + .input-icon {
-            color: var(--accent);
-        }
-
-        input::placeholder {
-            color: #9cb0a2;
-        }
-
+        input:focus, select:focus { border-color: var(--accent); background-color: #ffffff; box-shadow: 0 0 0 4px rgba(202, 114, 83, 0.12); }
+        input:focus + .input-icon, select:focus + .input-icon { color: var(--accent); }
+        input::placeholder { color: #9cb0a2; }
+        
         .btn-submit {
-            width: 100%;
-            padding: 16px;
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            background: var(--accent);
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 12px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 6px 24px rgba(202, 114, 83, 0.25);
+            width: 100%; padding: 16px; font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+            color: #ffffff; background: var(--accent); border: none; border-radius: 16px; cursor: pointer;
+            transition: all 0.2s ease; margin-top: 12px; letter-spacing: 0.3px; box-shadow: 0 6px 24px rgba(202, 114, 83, 0.25);
         }
 
-        .btn-submit:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 28px rgba(202, 114, 83, 0.35);
-        }
-
-        #statusBox {
-            margin-top: 24px;
-            padding: 15px 20px;
-            border-radius: 16px;
-            font-family: var(--font-sans);
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
-            display: none;
-        }
-
+        .btn-submit:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(202, 114, 83, 0.35); }
+        #statusBox { margin-top: 24px; padding: 15px 20px; border-radius: 16px; font-family: var(--font-sans); font-size: 14px; font-weight: 500; text-align: center; display: none; }
         .status-loading { background-color: #e6eee8; color: #234433; }
         .status-success { background-color: #d1e7dd; color: #0f5132; }
-        .status-error { background-color: #f8d7da; color: #842029; }
     </style>
 </head>
 <body>
@@ -229,20 +116,14 @@
         <p>Organise Your Expenses</p>
     </div>
 
-    <form id="ledgerForm">
+    <form id="ledgerForm" method="POST" action="https://script.google.com/macros/s/AKfycbzwDs1DxrL2HBRoojsvxnCHVsyRJHa2LsbqU1hO-_8zVys0SmOWvr3FZP0eVsU8TZLs/exec">
+        
         <div class="form-group">
             <label for="date">Calendar Date</label>
             <div class="input-wrapper">
-                <input type="date" id="date" required>
+                <input type="date" id="date" name="date" required>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="3" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                        <path d="M8 2v4M16 2v4" />
-                        <circle cx="8" cy="14" r="1" fill="currentColor" />
-                        <circle cx="12" cy="14" r="1" fill="currentColor" />
-                        <circle cx="16" cy="14" r="1" fill="currentColor" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3" /><line x1="3" y1="10" x2="21" y2="10" /><path d="M8 2v4M16 2v4" /><circle cx="8" cy="14" r="1" fill="currentColor" /><circle cx="12" cy="14" r="1" fill="currentColor" /><circle cx="16" cy="14" r="1" fill="currentColor" /></svg>
                 </div>
             </div>
         </div>
@@ -250,7 +131,7 @@
         <div class="form-group">
             <label for="category">Allocation Category</label>
             <div class="input-wrapper">
-                <select id="category" required>
+                <select id="category" name="category" required>
                     <option value="" disabled selected>Choose category...</option>
                     <option value="Staff Salary">Staff Salary</option>
                     <option value="Groceries">Groceries (Instamart, Blinkit, Zepto, DMart)</option>
@@ -268,10 +149,7 @@
                     <option value="Others">Others</option>
                 </select>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2S8 6 8 9a4 4 0 0 0 8 0c0-3-4-7-4-7z" />
-                        <path d="M10 14a3.5 3.5 0 1 0 5 4" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2S8 6 8 9a4 4 0 0 0 8 0c0-3-4-7-4-7z" /><path d="M10 14a3.5 3.5 0 1 0 5 4" /></svg>
                 </div>
             </div>
         </div>
@@ -279,7 +157,7 @@
         <div class="form-group">
             <label for="sourcingChannel">Platform</label>
             <div class="input-wrapper">
-                <select id="sourcingChannel" required>
+                <select id="sourcingChannel" name="sourcingChannel" required>
                     <option value="" disabled selected>Select platform...</option>
                     <option value="Online">Online (General Digital Network)</option>
                     <option value="Offline">Offline Store / In-Person Market</option>
@@ -288,11 +166,7 @@
                     <option value="Myntra/Ajio">Myntra / Ajio</option>
                 </select>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                        <line x1="12" y1="22.08" x2="12" y2="12" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
                 </div>
             </div>
         </div>
@@ -300,12 +174,9 @@
         <div class="form-group">
             <label for="description">Particulars Description</label>
             <div class="input-wrapper">
-                <input type="text" id="description" placeholder="What should we note down?..." required>
+                <input type="text" id="description" name="description" placeholder="What should we note down?..." required>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                        <path d="m15 5 4 4M5 16l3 3" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4M5 16l3 3" /></svg>
                 </div>
             </div>
         </div>
@@ -313,13 +184,9 @@
         <div class="form-group">
             <label for="amount">Value Amount</label>
             <div class="input-wrapper">
-                <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                <input type="number" id="amount" name="amount" step="0.01" min="0.01" placeholder="0.00" required>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <ellipse cx="12" cy="6" rx="6" ry="3" />
-                        <path d="M6 6v6c0 1.66 2.68 3 6 3s6-1.34 6-3V6" />
-                        <path d="M6 12v6c0 1.66 2.68 3 6 3s6-1.34 6-3v-6" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="6" ry="3" /><path d="M6 6v6c0 1.66 2.68 3 6 3s6-1.34 6-3V6" /><path d="M6 12v6c0 1.66 2.68 3 6 3s6-1.34 6-3v-6" /></svg>
                 </div>
             </div>
         </div>
@@ -327,20 +194,19 @@
         <div class="form-group">
             <label for="paymentMode">Payment Channel</label>
             <div class="input-wrapper">
-                <select id="paymentMode" required>
+                <select id="paymentMode" name="paymentMode" required>
                     <option value="" disabled selected>Select channel route...</option>
                     <option value="Cash">Cash 💵</option>
                     <option value="Card">Card 💳</option>
                     <option value="UPI">UPI 📱</option>
                 </select>
                 <div class="input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 12V8H4v10a2 2 0 0 0 2 2h14v-4" />
-                        <path d="M22 13a2 2 0 0 0-2-2H15v4h5a2 2 0 0 0 2-2Z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H4v10a2 2 0 0 0 2 2h14v-4" /><path d="M22 13a2 2 0 0 0-2-2H15v4h5a2 2 0 0 0 2-2Z" /></svg>
                 </div>
             </div>
         </div>
+
+        <input type="hidden" name="redirectUrl" id="redirectUrl" value="">
 
         <button type="submit" id="submitBtn" class="btn-submit">Commit Log</button>
     </form>
@@ -361,58 +227,27 @@
 
     document.getElementById('date').valueAsDate = new Date();
 
-    // YOUR CHOSEN GOOGLE WEB APP SCRIPT LINK 
-    const targetScriptUrl = 'https://script.google.com/macros/s/AKfycbzaIN4EJwEG9zankFYjgwJRrZnlm56BucaWh07e7srqtZsxAVyrPa0I-T-xBnpRLuI/exec';
+    // Dynamically lock down your current live URL path address to pass back to the redirect frame handles
+    document.getElementById('redirectUrl').value = window.location.href + "?status=completed";
 
-    document.getElementById('ledgerForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const submitBtn = document.getElementById('submitBtn');
+    // Auto UI notification trigger on return loops
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'completed') {
         const statusBox = document.getElementById('statusBox');
+        statusBox.style.display = 'block';
+        statusBox.className = 'status-success';
+        statusBox.textContent = 'Saved ✨';
+        
+        // Clean URL suffix flags cleanly
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
-        submitBtn.disabled = true;
+    document.getElementById('ledgerForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+        const statusBox = document.getElementById('statusBox');
         statusBox.style.display = 'block';
         statusBox.className = 'status-loading';
-        statusBox.textContent = 'Gently filing that away into your sheet... 🌿';
-
-        const recordPayload = {
-            date: document.getElementById('date').value,
-            category: document.getElementById('category').value,
-            sourcingChannel: document.getElementById('sourcingChannel').value,
-            description: document.getElementById('description').value,
-            amount: document.getElementById('amount').value,
-            paymentMode: document.getElementById('paymentMode').value
-        };
-
-        // ENCODING LAYER FOR INTERCEPT COMPATIBILITY
-        const searchParams = new URLSearchParams();
-        for (const key in recordPayload) {
-            searchParams.append(key, recordPayload[key]);
-        }
-
-        // FETCH LAYER WITH 'no-cors' PERMISSION BYPASS
-        fetch(targetScriptUrl, {
-            method: 'POST',
-            mode: 'no-cors', 
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: searchParams.toString()
-        })
-        .then(() => {
-            statusBox.className = 'status-success';
-            statusBox.textContent = 'Saved ✨';
-            
-            document.getElementById('description').value = '';
-            document.getElementById('amount').value = '';
-            document.getElementById('date').valueAsDate = new Date();
-        })
-        .catch(err => {
-            statusBox.className = 'status-error';
-            statusBox.textContent = 'Network Link Blocked.';
-            console.error(err);
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-        });
+        statusBox.textContent = 'Filing directly across cloud nodes... 🌿';
     });
 </script>
 
